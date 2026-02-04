@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ZAFRANÉ | Luxury Perfumes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Poppins,sans-serif;background:#111;color:#fff;scroll-behavior:smooth;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;background:#000;position:sticky;top:0;z-index:1000;flex-wrap:wrap;}
+nav h1{font-family:Playfair Display,serif;color:black;letter-spacing:2px;cursor:pointer;}
+nav ul{list-style:none;display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+nav ul li{cursor:pointer;position:relative;margin:5px 0;}
+nav ul li:hover{color:gold;}
+.cart-counter{background:gold;color:#000;font-weight:bold;font-size:12px;border-radius:50%;padding:2px 6px;position:absolute;top:-10px;right:-10px;}
+
+/* Hero */
+.hero{height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:url('https://images.unsplash.com/photo-1769981287706-0a300ee2fe69?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzAwOTY5Mjd8&ixlib=rb-4.1.0&q=85') center/cover no-repeat;}
+.hero h2{font-family:Playfair Display,serif;font-size:50px;color:gold;margin:10px 0;}
+.hero p{font-size:18px;margin:10px 0 20px;}
+.hero button{padding:12px 30px;border:none;background:gold;color:#000;font-size:16px;cursor:pointer;border-radius:5px;}
+
+/* About */
+.about{padding:50px 100px;background:#1a1a1a;text-align:center;}
+.about h2{font-family:Playfair Display,serif;font-size:40px;color:gold;margin-bottom:20px;}
+.about p{font-size:18px;line-height:1.6;color:#ddd;}
+
+/* Filter Buttons */
+.filter-btns{text-align:center;margin-bottom:30px;}
+.filter-btns button{padding:10px 20px;margin:5px;border:none;background:gold;color:#000;cursor:pointer;border-radius:5px;font-weight:bold;}
+.filter-btns button.active{background:#fff200;}
+
+/* Products */
+.products{padding:0 50px 50px 50px;text-align:center;}
+.products h2{font-family:Playfair Display,serif;margin-bottom:30px;color:gold;}
+.cards{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;}
+.card{background:#1c1c1c;width:250px;border-radius:10px;padding:20px;cursor:pointer;transition:transform 0.3s;position:relative;}
+.card:hover{transform:scale(1.05);}
+.card img{width:100%;border-radius:10px;}
+.card h3{margin:10px 0 5px;}
+.card p{color:gold;}
+.card button{margin-top:10px;width:100%;padding:10px;background:gold;border:none;cursor:pointer;border-radius:5px;font-weight:bold;}
+
+/* Info Section */
+.info-section{background:#1a1a1a;padding:30px 20px;text-align:center;color:#ccc;line-height:1.6;}
+.info-section input{margin-top:10px;margin-right:5px;padding:8px;border-radius:5px;border:none;width:220px;max-width:80%;}
+.info-section button{padding:8px 15px;border:none;border-radius:5px;background:gold;color:#000;cursor:pointer;}
+.info-section button:hover{background:#fff200;}
+
+/* FAQ */
+.faq{background:#111;padding:50px;text-align:center;}
+.faq h2{font-family:Playfair Display,serif;color:gold;margin-bottom:20px;}
+.faq .faq-item{margin-bottom:15px;cursor:pointer;border-bottom:1px solid #333;padding:10px 0;}
+.faq .answer{display:none;color:#ddd;padding-top:5px;}
+
+/* Footer */
+footer{background:blaCK;color:#fff;font-family:Poppins,sans-serif;padding-top:40px;}
+.footer-container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;padding:0 20px 20px 20px;}
+.footer-left h2{font-family:Playfair Display,serif;color:gold;margin-bottom:10px;}
+.footer-left p,.footer-left span{color:#ccc;}
+.footer-center ul{list-style:none;padding:0;}
+.footer-center ul li{margin:8px 0;cursor:pointer;}
+.footer-center ul li:hover{color:gold;}
+.footer-right .social-icons a{margin-right:10px;font-size:20px;text-decoration:none;color:#fff;transition:color 0.3s;}
+.footer-right .social-icons a:hover{color:gold;}
+.footer-bottom{text-align:center;margin-top:15px;font-size:14px;color:#777;}
+
+/* Modal */
+.modal{display:none;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,0.8);}
+.modal-content{background:#1c1c1c;margin:10% auto;padding:20px;border-radius:10px;width:90%;max-width:500px;text-align:center;position:relative;}
+.modal-content img{width:100%;border-radius:10px;margin-bottom:15px;}
+.modal-content h3{margin:10px 0 5px;}
+.modal-content p{color:gold;margin-bottom:15px;}
+.close{position:absolute;top:10px;right:15px;font-size:25px;cursor:pointer;color:gold;}
+
+/* WhatsApp Button */
+.whatsapp-btn{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:15px 20px;border-radius:50px;font-size:20px;text-decoration:none;z-index:1000;}
+
+/* === RESPONSIVE MEDIA QUERIES === */
+@media(max-width:1024px){
+  .about{padding:50px 50px;}
+  .products{padding:0 30px 50px 30px;}
+}
+@media(max-width:768px){
+  nav{justify-content:center;}
+  .hero h2{font-size:40px;}
+  .hero p{font-size:16px;}
+  .cards{gap:15px;}
+  .card{width:200px;}
+  .about{padding:40px 20px;}
+}
+@media(max-width:480px){
+  .hero h2{font-size:28px;}
+  .hero p{font-size:14px;}
+  .card{width:150px;}
+  nav ul{flex-direction:column;gap:10px;}
+  .filter-btns button{padding:8px 15px;font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <h1 onclick="scrollToSection('hero')">ZAFRANÉ</h1>
+  <ul>
+    <li onclick="scrollToSection('hero')">Home</li>
+    <li onclick="scrollToSection('products')">Shop</li>
+    <li onclick="scrollToSection('about')">About</li>
+    <li onclick="scrollToSection('faq')">FAQ</li>
+    <li onclick="alert('Contact us at luxury@zafrane.com or call +92-300-1234567')">Contact</li>
+    <li>Cart <span class="cart-counter" id="cartCount">0</span></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero" class="hero">
+  <h2>Luxury in Every Drop</h2>
+  <p>Discover the essence of royal fragrance</p>
+  <button onclick="scrollToSection('products')">Shop Now</button>
+</section>
+
+<!-- About -->
+<section id="about" class="about">
+  <h2>About ZAFRANÉ</h2>
+  <p>ZAFRANÉ is a luxury perfume brand website designed to reflect elegance, confidence, and timeless fragrance. Explore a premium collection of perfumes crafted for men, women, and unisex.</p>
+</section>
+
+<!-- Filter Buttons -->
+<div class="filter-btns">
+  <button class="active" onclick="filterCategory('All', this)">All</button>
+  <button onclick="filterCategory('Men', this)">Men</button>
+  <button onclick="filterCategory('Women', this)">Women</button>
+  <button onclick="filterCategory('Unisex', this)">Unisex</button>
+</div>
+
+<!-- Products -->
+<section id="products" class="products">
+  <h2>Featured Perfumes</h2>
+  <div class="cards" id="productCards"></div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+  <h2>FAQ</h2>
+  <div class="faq-item" onclick="toggleAnswer(this)">
+    Q: How long does the perfume last?
+    <div class="answer">A: Our perfumes last 8–12 hours depending on the fragrance and application.</div>
+  </div>
+  <div class="faq-item" onclick="toggleAnswer(this)">
+    Q: Do you offer international shipping?
+    <div class="answer">A: Currently we deliver only within Pakistan. International shipping coming soon.</div>
+  </div>
+  <div class="faq-item" onclick="toggleAnswer(this)">
+    Q: Are the perfumes original?
+    <div class="answer">A: Yes — all our perfumes are authentic and sourced directly from official distributors.</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <h2>ZAFRANÉ</h2>
+      <p>"Luxury in Every Drop"</p>
+    </div>
+    <div class="footer-center">
+      <h3>Shop / Collections</h3>
+      <ul>
+        <li onclick="scrollToSection('products')">Perfumes</li>
+        <li>Gift Sets</li>
+        <li>Unisex</li>
+        <li>Best Sellers</li>
+      </ul>
+    </div>
+    <div class="footer-center">
+      <h3>Customer Support</h3>
+      <ul>
+        <li onclick="scrollToSection('faq')">FAQ</li>
+        <li>Shipping & Delivery</li>
+        <li>Return & Refund</li>
+        <li>Contact: +92-3013094487</li>
+        <li>Email: luxury@zafrane.com</li>
+      </ul>
+    </div>
+    <div class="footer-center">
+      <h3>Legal</h3>
+      <ul>
+        <li>Privacy Policy</li>
+        <li>Terms & Conditions</li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#" title="Facebook">zafraneperfume.com</a>
+        <a href="#" title="Instagram">zafraneperfumes</a>
+        <a href="#" title="Twitter">zafraneperfumestwitter.com</a>
+      </div>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2026 ZAFRANÉ Perfumes | All rights Reserved</p>
+</footer>
+
+<!-- Modal -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="">
+    <h3 id="modalName"></h3>
+    <p id="modalPrice"></p>
+    <p id="modalDesc"></p>
+    <button id="modalAdd" onclick="">Add to Cart</button>
+  </div>
+</div>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/923001234567?text=Hello%20ZAFRANE!" target="_blank" class="whatsapp-btn">💬 WhatsApp</a>
+
+<script>
+const products=[
+{name:"Oud Royale",price:"Rs.4500",desc:"Luxurious oud fragrance",image:"https://images.unsplash.com/photo-1589820933525-dadd23d13c56?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzAwOTUxMTZ8&ixlib=rb-4.1.0&q=85",category:"Men"},
+{name:"Rose Velvet",price:"Rs.3200",desc:"Delicate rose petals with musk",image:"https://images.unsplash.com/photo-1591375372226-3531cf2eb6d3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzAwOTUxNzV8&ixlib=rb-4.1.0&q=85",category:"Women"},
+{name:"Amber Night",price:"Rs.3800",desc:"Warm unisex scent with amber & spice",image:"https://images.unsplash.com/photo-1680503504148-25f2d178ff05?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzAwOTUyMDl8&ixlib=rb-4.1.0&q=85",category:"Unisex"},
+{name:"Velvet Oud",price:"Rs.4000",desc:"Rich velvet oud",image:"https://images.unsplash.com/photo-1757313251752-a914d3d85a7f?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzAwOTUwNTV8&ixlib=rb-4.1.0&q=85",category:"Men"},
+{name:"Rose Essence",price:"Rs.3500",desc:"Fresh rose fragrance",image:"https://images.unsplash.com/photo-1757313239816-9bac11170af8?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzAwOTUwOTl8&ixlib=rb-4.1.0&q=85",category:"Women"},
+{name:"Amber Delight",price:"Rs.3700",desc:"Unisex amber delight",image:"https://images.unsplash.com/photo-1769038933775-305885b212c1?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzAwOTQzMzZ8&ixlib=rb-4.1.0&q=85",category:"Unisex"}
+];
+
+let cartCount=0;
+
+function renderCards(filter="All"){
+const container=document.getElementById('productCards');container.innerHTML="";
+products.forEach(p=>{if(filter==="All"||p.category===filter){const card=document.createElement('div');card.className="card";card.innerHTML=`<img src="${p.image}"><h3>${p.name}</h3><p>${p.price}</p><button class="addCartBtn">Add to Cart</button>`;card.addEventListener('click',()=>openModal(p.name));const btn=card.querySelector('.addCartBtn');btn.addEventListener('click',e=>{e.stopPropagation();addToCart(p.name);});container.appendChild(card);}});
+}
+renderCards();
+function filterCategory(category,btn){document.querySelectorAll('.filter-btns button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderCards(category);}
+function addToCart(product){cartCount++;document.getElementById('cartCount').innerText=cartCount;alert(product+" added to cart!");}
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function subscribe(){const email=document.getElementById('subscribeEmail').value;if(email){alert("Subscribed! Updates will be sent to: "+email);document.getElementById('subscribeEmail').value='';}else alert("Enter valid email.");}
+function openModal(productName){const p=products.find(x=>x.name===productName);document.getElementById('productModal').style.display="block";document.getElementById('modalImage').src=p.image;document.getElementById('modalName').innerText=p.name;document.getElementById('modalPrice').innerText=p.price;document.getElementById('modalDesc').innerText=p.desc;document.getElementById('modalAdd').onclick=function(){addToCart(p.name);};}
+function closeModal(){document.getElementById('productModal').style.display="none";}
+window.onclick=function(e){if(e.target==document.getElementById('productModal'))closeModal();}
+function toggleAnswer(el){const ans=el.querySelector('.answer');ans.style.display=ans.style.display==='block'?'none':'block';}
+</script>
+</body>
+</html>
